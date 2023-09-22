@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="170dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:elevation="10dp"
+    app:cardElevation="15dp"
+    android:layout_margin="10dp"
+    app:cardCornerRadius="15dp"
+    android:id="@+id/card"
+    android:layout_height="wrap_content">
+
+
+    <LinearLayout
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/image_payment"
+            android:layout_width="wrap_content"
+            android:src="@drawable/danilla"
+            android:layout_height="170dp"/>
+
+        <TextView
+            android:id="@+id/payment_method"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="pppp"
+            android:fontFamily="@font/poppins"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:layout_gravity="center"
+            android:textColor="@color/black"
+            android:textStyle="bold"/>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
