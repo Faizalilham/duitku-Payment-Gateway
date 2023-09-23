@@ -25,7 +25,7 @@ Payment Gateway adalah solusi yang memungkinkan aplikasi Anda untuk menerima pem
 
 ## Langkah 1: Persiapan
 Sebelum Anda mulai mengintegrasikan Payment Gateway, Anda perlu mempersiapkan beberapa hal sebagai berikut:
-- Mendaftar akun di layanan Payment Gateway duitku.
+- Mendaftar akun di layanan Payment Gateway, disini saya pakai layanan dari duitku.
 - Membuat project untuk mendapatkan API Key  dan Merchant Kode dari layanan Payment Gateway duitku.
 - Memahami dokumentasi API yang disediakan oleh Payment Gateway duitku (Request / Response).
 - Memastikan aplikasi Anda memenuhi semua prasyarat yang diperlukan oleh Payment Gateway duitku seperti sdk  	   android atau yang lain.
@@ -93,7 +93,7 @@ interface ApiService {
 data class PaymentMethodRequest(
 
     @SerializedName("merchantcode")
-    val merchantcode : String = "DS16782",
+    val merchantcode : String = "Sesuaikan dengan merchane code masing masing",
 
     @SerializedName("amount")
     val amont : String,
@@ -276,6 +276,7 @@ class PaymentActivity : AppCompatActivity() {
     private var nameProduct = ""
     private var amount = 0
     private var id = 0
+    private val apiKey = "Isi dengan Api Key masing masing"
 
     private lateinit var paymentViewModel : PaymentViewModel
     private lateinit var paymentAdapter: PaymentAdapter
@@ -295,7 +296,7 @@ class PaymentActivity : AppCompatActivity() {
         Toast.makeText(this, "$amount", Toast.LENGTH_SHORT).show()
         if(amount > 10000 && id != 0){
             binding.tvTotal.text = amount.toString()
-            inputSignature = "DS16782"+"$amount"+ currentDateTime() +"a210a442fdab0e7b39e93d4da6d1f4c0"
+            inputSignature = "DS16782"+"$amount"+ currentDateTime() +apiKey
             getAllPayment(amount.toString(),inputSignature)
         }else{
             Toast.makeText(this, "Pembayaran harus lebih dari 10000", Toast.LENGTH_SHORT).show()
@@ -322,7 +323,7 @@ class PaymentActivity : AppCompatActivity() {
         paymentAdapter = PaymentAdapter(data,object : PaymentAdapter.OnClick{
             override fun onClick(data: PaymentMethodResponse) {
 
-                inputMd5 = "DS16782"+"$id"+"$amount"+"a210a442fdab0e7b39e93d4da6d1f4c0"
+                inputMd5 = "DS16782"+"$id"+"$amount"+apiKey
                 Log.d("TAGS","${data.paymentMethod} ${amount}")
 
                 try {
@@ -422,4 +423,6 @@ Error atau kesalahan traksaksi bisa diketahui lewat response API Berupa HTTP sta
 Anda dapat menemukan informasi tentang lisensi penggunaan Payment Gateway di [sini](https://github.com/Faizalilham).
 
 Dengan mengikuti panduan ini, Anda akan dapat dengan mudah mengintegrasikan Payment Gateway ke dalam aplikasi android  Anda dan mulai menerima pembayaran dengan lancar. Jika Anda memiliki pertanyaan tambahan, jangan ragu untuk menghubungi tim dukungan kami.
+
+
 

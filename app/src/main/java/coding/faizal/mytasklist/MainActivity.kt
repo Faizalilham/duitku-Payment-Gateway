@@ -2,12 +2,10 @@ package coding.faizal.mytasklist
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import coding.faizal.mytasklist.adapter.TransactionAdapter
-import coding.faizal.mytasklist.api.model.*
 import coding.faizal.mytasklist.databinding.ActivityMainBinding
 import coding.faizal.mytasklist.room.entity.Transactions
 import coding.faizal.mytasklist.viewmodel.PaymentViewModel
@@ -19,15 +17,13 @@ import com.duitku.sdk.DuitkuClient
 import com.duitku.sdk.DuitkuUtility.BaseKitDuitku
 import com.duitku.sdk.DuitkuUtility.DuitkuKit
 import com.duitku.sdk.Model.ItemDetails
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 class MainActivity : DuitkuClient() {
 
     private var _binding : ActivityMainBinding? = null
     private val binding get() = _binding!!
+
+    private val TAG = "TAG"
 
     private lateinit var transactionsViewModel : TransactionsViewModel
     private lateinit var paymentViewModel: PaymentViewModel
@@ -89,7 +85,9 @@ class MainActivity : DuitkuClient() {
 
             }
 
-        })
+
+
+        },this)
 
         binding.tvTransactions.apply {
             adapter = transactionAdapter
@@ -97,7 +95,10 @@ class MainActivity : DuitkuClient() {
         }
     }
 
-
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
+    }
 
     // Dipakai Jika menggunakan library duitku
     override fun onSuccessTransaction(status: String, reference: String, amount: String, Code: String) {
